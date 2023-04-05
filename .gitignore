@@ -1,0 +1,5 @@
+.env
+artifacts-zk/
+cache-zk/
+cache/
+node_modules/
