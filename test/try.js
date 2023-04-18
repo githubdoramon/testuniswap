@@ -35,8 +35,12 @@ describe.only('ZKSync paymaster integration @zksync', function () {
         const uniV2Router = await deployer.deploy(UniV2Router, [uniV2Factory.address, tokens.WETH.address]);
         await tokens.DAI.approve(uniV2Router.address, ether('200'));
         await tokens.USDC.approve(uniV2Router.address, ether('200'));
-        await uniV2Router.addLiquidity(tokens.DAI.address, tokens.USDC.address, ether('100'), ether('100'), ether('100'), ether('100'), addr1.address, '20000000000')
+        const a = await uniV2Router.addLiquidity(tokens.DAI.address, tokens.USDC.address, ether('100'), ether('100'), ether('100'), ether('100'), addr1.address, '20000000000',  {
+            gasLimit: '2000000000',
+        })
+        console.log(await a)
         const uniV2DaiUsdc = await uniV2Factory.getPair(tokens.DAI.address, tokens.USDC.address);
+        console.log(uniV2DaiUsdc)
         // const Paymaster = await deployer.loadArtifact('Paymaster');
         // const paymaster = await deployer.deploy(Paymaster, [addr1.address]);
 
